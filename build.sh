@@ -4,4 +4,4 @@ echo "Building Docker image..."
 
 docker build -t devops-build:v1 .
 
-echo "Docker image built successfully...."
+echo "Docker image built successfully......."
