@@ -40,6 +40,24 @@ pipeline {
                 sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
             }
         }
+        stage('Deploy to App Server') {
+    steps {
+        sh '''
+        ssh -o StrictHostKeyChecking=no ubuntu@<APP-EC2-IP> << 'EOF'
+            docker pull harikrishna2125/devops-build-dev:latest
+
+            docker stop devops-app || true
+            docker rm devops-app || true
+
+            docker run -d \
+              --name devops-app \
+              --restart unless-stopped \
+              -p 80:80 \
+              harikrishna2125/devops-build-dev:latest
+        EOF
+        '''
+    }
+}
     }
 
     post {
