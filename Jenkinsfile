@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy to App Server') {
     steps {
         sh '''
-        ssh -o StrictHostKeyChecking=no ubuntu@<APP-EC2-IP> << 'EOF'
+        ssh -o StrictHostKeyChecking=no ubuntu@54.221.19.52
             docker pull harikrishna2125/devops-build-dev:latest
 
             docker stop devops-app || true
